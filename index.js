@@ -2,8 +2,7 @@
  * 日志模块
  */
 
-const fsx = require('fs-extra');
-const moment = require('moment');
+const fs = require('fs');
 const path = require('path');
 const winston = require('winston');
 const { combine, timestamp, label, printf } = winston.format;
@@ -25,7 +24,7 @@ function onLoad(app) {
     const logDir = config.logDir || path.join(process.cwd(), 'logs');
     const logOpts = config.logOpts;
     if (logDir) {
-        fsx.ensureDirSync(logDir);
+        ensureLogDir(logDir);
     }
     const transports = [
         new winston.transports.Console({
@@ -60,7 +59,7 @@ function onLoad(app) {
         format: combine(
             label({ label: config.name || 'ibird' }),
             timestamp(),
-            printf(info => `${moment(info.timestamp).format('YYYY-MM-DD HH:mm:ss')} [${info.label}] ${info.level}: ${info.message}`)
+            printf(info => `${new Date(info.timestamp).toLocaleString()} [${info.label}] ${info.level}: ${info.message}`)
         ),
         transports,
         exceptionHandlers
@@ -75,6 +74,26 @@ function onLoad(app) {
         debug: logger.debug.bind(logger),
         silly: logger.silly.bind(logger)
     });
+}
+
+/**
+ * 确保日志目录存在
+ * @param dir
+ */
+function ensureLogDir(dir) {
+    if (!dir) return;
+    let mkdir = true;
+    try {
+        const stat = fs.statSync(dir);
+        if (stat && !stat.isDirectory()) {
+            mkdir = false;
+            throw new Error(`'logDir' must be a directory`);
+        }
+    } catch (e) {
+        if (mkdir) {
+            fs.mkdirSync(dir);
+        }
+    }
 }
 
 /**
