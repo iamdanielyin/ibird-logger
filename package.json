@@ -1,11 +1,11 @@
 {
-  "name": "ibird-log",
-  "version": "1.0.0-alpha.2",
+  "name": "ibird-logger",
+  "version": "1.0.0-alpha.3",
   "description": "Logger addon for ibird.",
   "main": "app/index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yinfxs/ibird-log.git"
+    "url": "git+https://github.com/yinfxs/ibird-logger.git"
   },
   "keywords": [
     "ibird",
@@ -23,9 +23,9 @@
   "author": "yinfxs",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/yinfxs/ibird-log/issues"
+    "url": "https://github.com/yinfxs/ibird-logger/issues"
   },
-  "homepage": "https://github.com/yinfxs/ibird-log#readme",
+  "homepage": "https://github.com/yinfxs/ibird-logger#readme",
   "dependencies": {
     "winston": "^3.0.0-rc1"
   }

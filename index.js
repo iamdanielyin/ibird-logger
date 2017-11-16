@@ -100,7 +100,7 @@ function ensureLogDir(dir) {
  * 导出模块
  */
 module.exports = {
-    namespace: 'ibird-log',
+    namespace: 'ibird-logger',
     onLoad,
     enable
 };
