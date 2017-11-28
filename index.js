@@ -22,14 +22,13 @@ const enable = {
 function onLoad(app) {
     const config = app.c();
     const logDir = config.logDir || path.join(process.cwd(), 'logs');
-    const logOpts = config.logOpts;
-    if (logDir) {
-        ensureLogDir(logDir);
-    }
+    const logOpts = config.logOpts || {};
+    ensureLogDir(logDir);
+    
     if (!config.logDir) {
-        console.log(`/// LogDir: ${logDir} ///`);
+        console.log(`/// Log dir: ${logDir} ///`);
     }
-    const transports = [
+    const transports = logOpts.transports || [
         new winston.transports.Console({
             humanReadableUnhandledException: true,
             colorize: true,
@@ -49,7 +48,7 @@ function onLoad(app) {
             maxFiles: 5
         })
     ];
-    const exceptionHandlers = [
+    const exceptionHandlers = logOpts.exceptionHandlers || [
         new winston.transports.File({
             filename: path.join(logDir, 'exceptions.log'),
             colorize: true,
@@ -57,12 +56,14 @@ function onLoad(app) {
             maxFiles: 5
         }),
     ];
-    const opts = logOpts || {
+    const formatter = (typeof logOpts.formatter === 'function') ? logOpts.formatter :
+        info => `${new Date(info.timestamp).toLocaleString()} [${info.label}] ${info.level}: ${info.message}`;
+    const opts = logOpts.opts || {
         level: 'info',
         format: combine(
             label({ label: config.name || 'ibird' }),
             timestamp(),
-            printf(info => `${new Date(info.timestamp).toLocaleString()} [${info.label}] ${info.level}: ${info.message}`)
+            printf(formatter)
         ),
         transports,
         exceptionHandlers
