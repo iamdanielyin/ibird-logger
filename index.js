@@ -26,6 +26,9 @@ function onLoad(app) {
     if (logDir) {
         ensureLogDir(logDir);
     }
+    if (!config.logDir) {
+        console.log(`/// LogDir: ${logDir} ///`);
+    }
     const transports = [
         new winston.transports.Console({
             humanReadableUnhandledException: true,
