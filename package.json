@@ -18,7 +18,8 @@
     "addon",
     "winston",
     "logger",
-    "log"
+    "log",
+    "ibird-addon"
   ],
   "author": "yinfxs",
   "license": "Apache-2.0",
