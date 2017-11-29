@@ -6,6 +6,7 @@ const fs = require('fs');
 const path = require('path');
 const winston = require('winston');
 const { combine, timestamp, label, printf } = winston.format;
+const ctx = {};
 const enable = {
     error: null,
     warn: null,
@@ -18,13 +19,17 @@ const enable = {
 /**
  * 加载插件
  * @param app
+ * @param options
  */
-function onLoad(app) {
+function onLoad(app, options) {
+    ctx.app = app;
+    ctx.options = options || {};
+
     const config = app.c();
     const logDir = config.logDir || path.join(process.cwd(), 'logs');
     const logOpts = config.logOpts || {};
     ensureLogDir(logDir);
-    
+
     if (!config.logDir) {
         console.log(`/// Log dir: ${logDir} ///`);
     }
