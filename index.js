@@ -26,44 +26,40 @@ function onLoad(app, options) {
     ctx.options = options || {};
 
     const config = app.c();
-    const logDir = config.logDir || path.join(process.cwd(), 'logs');
-    const logOpts = config.logOpts || {};
-    ensureLogDir(logDir);
-
-    if (!config.logDir) {
-        console.log(`/// Log dir: ${logDir} ///`);
-    }
-    const transports = logOpts.transports || [
+    options.logDir = options.logDir || path.join(process.cwd(), 'logs');
+    ensureLogDir(options.logDir);
+    
+    const transports = options.transports || [
         new winston.transports.Console({
             humanReadableUnhandledException: true,
             colorize: true,
             json: false
         }),
         new winston.transports.File({
-            filename: path.join(logDir, 'error.log'),
+            filename: path.join(options.logDir, 'error.log'),
             level: 'error',
             colorize: true,
             maxsize: 20971520, // 20M
             maxFiles: 5
         }),
         new winston.transports.File({
-            filename: path.join(logDir, 'combined.log'),
+            filename: path.join(options.logDir, 'combined.log'),
             colorize: true,
             maxsize: 52428800, // 50M
             maxFiles: 5
         })
     ];
-    const exceptionHandlers = logOpts.exceptionHandlers || [
+    const exceptionHandlers = options.exceptionHandlers || [
         new winston.transports.File({
-            filename: path.join(logDir, 'exceptions.log'),
+            filename: path.join(options.logDir, 'exceptions.log'),
             colorize: true,
             maxsize: 20971520, // 20M
             maxFiles: 5
         }),
     ];
-    const formatter = (typeof logOpts.formatter === 'function') ? logOpts.formatter :
+    const formatter = (typeof options.formatter === 'function') ? options.formatter :
         info => `${new Date(info.timestamp).toLocaleString()} [${info.label}] ${info.level}: ${info.message}`;
-    const opts = logOpts.opts || {
+    const opts = options.logOpts || {
         level: 'info',
         format: combine(
             label({ label: config.name || 'ibird' }),
