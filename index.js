@@ -7,7 +7,7 @@ const path = require('path');
 const winston = require('winston');
 const { combine, timestamp, label, printf } = winston.format;
 const ctx = {};
-const enable = {
+const api = {
     error: null,
     warn: null,
     info: null,
@@ -71,7 +71,7 @@ function onLoad(app, options) {
     };
     const logger = winston.createLogger(opts);
     app.config({ logger });
-    Object.assign(enable, {
+    Object.assign(api, {
         error: logger.error.bind(logger),
         warn: logger.warn.bind(logger),
         info: logger.info.bind(logger),
@@ -107,5 +107,5 @@ function ensureLogDir(dir) {
 module.exports = {
     namespace: 'ibird-logger',
     onLoad,
-    enable
+    api
 };
