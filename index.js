@@ -21,7 +21,7 @@ const api = {
  * @param app
  * @param options
  */
-function onLoad(app, options) {
+function onload(app, options) {
     ctx.app = app;
     ctx.options = options || {};
 
@@ -106,6 +106,6 @@ function ensureLogDir(dir) {
  */
 module.exports = {
     namespace: 'ibird-logger',
-    onLoad,
+    onload,
     api
 };
