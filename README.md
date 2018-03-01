@@ -27,12 +27,12 @@ app.import(logger);
   - `formatter` - 可选，函数类型，日志输出格式化函数，传入`info`参数
   - `logOpts` - 可选，对象类型，覆盖默认的所有日志设置
 - **API**
-  - `info` - 同`winston.info`函数
-  - `error` - 同`winston.error`函数
-  - `warn` - 同`winston.warn`函数
-  - `verbose` - 同`winston.verbose`函数
-  - `debug` - 同`winston.debug`函数
-  - `silly` - 同`winston.silly`函数
+  - `info(msg)` - 同`winston.info`函数
+  - `error(msg)` - 同`winston.error`函数
+  - `warn(msg)` - 同`winston.warn`函数
+  - `verbose(msg)` - 同`winston.verbose`函数
+  - `debug(msg)` - 同`winston.debug`函数
+  - `silly(msg)` - 同`winston.silly`函数
 
 
 ## 注意
