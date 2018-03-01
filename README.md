@@ -19,20 +19,20 @@ app.import(logger);
 
 ## 插件信息
 
-* 命名空间 - ibird-logger
-* 引用参数
-  * `logDir` - 可选，字符串类型，日志存放目录
-  * `transports` - 可选，数组类型，覆盖默认的`transports`
-  * `exceptionHandlers` - 可选，数组类型，覆盖默认的`exceptionHandlers`
-  * `formatter` - 可选，函数类型，日志输出格式化函数，传入`info`参数
-  * `logOpts` - 可选，对象类型，覆盖默认的所有日志设置
-* API
-  * `info` - 同`winston.info`函数
-  * `error` - 同`winston.error`函数
-  * `warn` - 同`winston.warn`函数
-  * `verbose` - 同`winston.verbose`函数
-  * `debug` - 同`winston.debug`函数
-  * `silly` - 同`winston.silly`函数
+- **命名空间** - ibird-logger
+- **引用参数**
+  - `logDir` - 可选，字符串类型，日志存放目录
+  - `transports` - 可选，数组类型，覆盖默认的`transports`
+  - `exceptionHandlers` - 可选，数组类型，覆盖默认的`exceptionHandlers`
+  - `formatter` - 可选，函数类型，日志输出格式化函数，传入`info`参数
+  - `logOpts` - 可选，对象类型，覆盖默认的所有日志设置
+- **API**
+  - `info` - 同`winston.info`函数
+  - `error` - 同`winston.error`函数
+  - `warn` - 同`winston.warn`函数
+  - `verbose` - 同`winston.verbose`函数
+  - `debug` - 同`winston.debug`函数
+  - `silly` - 同`winston.silly`函数
 
 
 ## 注意
